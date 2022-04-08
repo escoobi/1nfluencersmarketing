@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Register user</title>
+</head>
+<body>
+
+<form method="post">
+    <label for="name">Fullname:</label><p>
+    <input name="name" id="name" required><p>
+    <label for="username">Email:</label><p>
+    <input name="email" id="email" required placeholder="example@example.com" size="30"><p>
+    <label for="password">Password:</label><p>
+    <input type="password" name="password" id="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"><p>
+    <input type="submit" value="Insert">
+</form>
+<a href="javascript:history.back()">back</a>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<h4>{{user}}</h4>
+<p>
+<form action="pokemon" method="post">
+    <label for="poke">Pokemon name:</label>
+    <p>
+        <input name="poke" id="poke" required placeholder="pikachu" size="30">
+    <p>
+        <input type="submit" value="Find!">
+</form>
+
+{% for table in tables %}
+
+{{table|safe}}
+
+{% endfor %}
+
+<a href="javascript:history.back()">back</a>
+</body>
+</html>
