@@ -2,17 +2,33 @@
 ### Back End Test
 ### <center>Theoretical Test</center>
 1. How does one combine two Pandas dataframes?
-    > aasdasd
+    > According to official documentation: Merge, join, concatenate and compare.
+In this application I used append(), deprecated since version 1.4.0
 2. What is the difference between a local variable and a global variable?
-   > adasdasdasd
+   > Global variable is the one that we declare in the main scope of the application and the local variable is the one that is declared inside a function outside the main scope of the program.
 3. How does one create a copy of a dataframe using Pandas?
-    > adsasdasd
+    > We can perform the copy using the copy() command.
+Ex: my_data_frame = pandas.DataFrame(data) -> 
+   > new_data_frame = my_data_frame.copy()
 4. How does one handle concurrent requests in Flask?
-    > dddddd
+    > Flask does not manage the threads, this function is used by Gunicorn to perform the application.
+When running the app we pass the parameters.
+Ex: gunicorn --workers=5 --threads=2 app:app
 5. What is a Replica Set in MongoDB?
-    > eeeeee
+    > It is a way of replicating several database datasets as a form of security and not for a service. And we can use these dataset sets to perform readings by different users at the same time.
+These sets work as follows.
+Ex: dataset_primary, dataset_secondary01 and dataset_secondary02.
+Only the primary receives writings, everyone receives readings, when they write to the primary, it replicates to all the secondaries and if the primary falls, a secondary assumes as primary and starts to receive the writings;
 6. What is a Transaction in a database context?
-    > asdasd
+    > In an abstract and simplified way, a transaction
+can be seen as a set of
+data read and write operations.
+These transactions have their priorities.
+Ex: 
+   > – Atomicity 
+   > – Consistency
+   > – Isolation
+   > – Durability or Persistence
 
 ## Practical Test
 * Create an application using Python, Flask and SQL to register and authenticate an user.
