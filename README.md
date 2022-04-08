@@ -15,7 +15,7 @@
 6. What is a Transaction in a database context?
     > asdasd
 
-##Practical Test
+## Practical Test
 * Create an application using Python, Flask and SQL to register and authenticate an user.
 The user must have an unique email address and the password must have at least 8
 characters.
