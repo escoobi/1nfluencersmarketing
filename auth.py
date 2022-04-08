@@ -76,7 +76,7 @@ def login():
 def users():
     if request.method == "POST":
         insert_user(Users(request.form["email"], request.form["name"], request.form["password"]))
-        return redirect(url_for("ok.html"))
+        return render_template("login.html")
     return render_template("users.html")
 
 
