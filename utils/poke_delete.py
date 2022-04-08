@@ -4,6 +4,11 @@ from models.poke_abilites import PokeAbiliteis
 
 import models.driver_mongodb
 
+"""
+Method for delete pokemon in mongoDb
+
+takes as a parameter the Poke class
+"""
 def delete_poke(Poke):
 
     poke_delete = models.driver_mongodb.Connect.db.pokemon

@@ -3,6 +3,12 @@ import pymongo
 from models.poke_abilites import PokeAbiliteis
 import models.driver_mongodb
 
+"""
+Method for select pokemon in mongoDb
+
+1- The first function takes the name of the pokemon to query and returns a dictionary
+2 - The second function receives or does not receive attributes, it queries all pokemon registered in mongoDB and returns a pandas.DataFrame
+"""
 
 def select_poke(name: str) -> dict:
     try:

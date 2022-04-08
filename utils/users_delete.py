@@ -2,6 +2,11 @@ import pymongo
 from models.users import Users
 import models.driver_mongodb
 
+"""
+
+Function to delete user in mongoDB is passed as a parameter to the Users class
+
+"""
 def delete_users(Users):
 
     users_delete = models.driver_mongodb.Connect.db.users

@@ -1,3 +1,7 @@
+"""
+User class where it receives the parameters email, name and password.
+The getter and setter was generated and has a dictionary return
+"""
 class Users:
 
     def __init__(self: object, email: str, name: str, password: str):
@@ -29,6 +33,7 @@ class Users:
     def password(self: object, password: str) -> None:
         self.__password: str = password
 
+    # return a dict with name, email and password
     def __dict__(self: object) -> dict:
         return {"name": self.name, "email": self.email, "password": self.password}
 

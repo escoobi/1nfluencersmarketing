@@ -5,6 +5,19 @@ from utils.users_insert import insert_user
 from utils.poke_df import df_pandas_poke
 from models.users import Users
 from utils.poke_select import select_all_poke
+'''
+Author = Gustavo O. Cardozo
+Email = gustavo.o.c@icloud.com
+Linkedin = https://www.linkedin.com/in/gustavo-oliveira-cardozo-0258a993/
+--------------------------------------------------------------------------
+This application performs user authentication using MongoDB.
+It allows registering the user and changing the password.
+The user logging in has access to Pokemon research using the api (https://pokeapi.co/) we consume this api and treat the data using dataframes (Pandas) and finally registering in mongoDb with the pokemon's name, photo of the pokemon and its ability.
+And we display a table of registered pokemon.
+When we make the query in the api, it presents the information handled with Pandas in JSON format.
+
+'''
+
 
 app = Flask(__name__)
 

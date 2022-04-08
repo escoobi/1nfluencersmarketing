@@ -11,6 +11,15 @@ from utils.poke_insert import insert_poke
 import requests
 
 
+"""
+Method for process DataFrame in Pandas
+This function receives the name of the pokemon as a parameter and performs the query in the API.
+A dataFrame was created to receive the JSON from the API query.
+A loop was created to check the pokemon's skills, as it has pokemon with more than one skills.
+In the loop I compare the dataFrames and pass skills and other information to the Poke Class which returns me a dictionary ready to send to mongoDB.
+"""
+
+
 def df_pandas_poke(pokemon: str) -> str:
     ress = requests.get(f"https://pokeapi.co/api/v2/pokemon/{pokemon}")
 
@@ -26,8 +35,8 @@ def df_pandas_poke(pokemon: str) -> str:
                                  df_abilities.iloc[x]["ability"]["name"])
 
             df = df.append(poke.__dict__(), ignore_index=True)
-            insert_poke(PokeAbiliteis(poke.name, poke.pic, poke.name_abilities))
+            insert_poke(PokeAbiliteis(poke.name, poke.pic, poke.name_abilities)) # Insert Class in MongoDB.
 
-        return df.to_json(orient="records")
+        return df.to_json(orient="records") # return a json classification for records
     else:
         return {"code": ress.status_code}

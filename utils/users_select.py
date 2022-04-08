@@ -2,6 +2,14 @@ import pymongo
 from models.users import Users
 import models.driver_mongodb
 
+"""
+
+Function to select user in mongoDB
+1. This function receives as a parameter the email to perform the query
+2. This function receives the email and password as a parameter to perform the query and authenticate by sequence.
+
+Both functions return a dictionary
+"""
 
 def select_user(email: str) -> dict:
     try:
