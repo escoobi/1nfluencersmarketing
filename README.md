@@ -87,3 +87,17 @@ Perform the query before inserting
   2. This function receives the email and password as a parameter to perform the query and authenticate by sequence.
   3. Both functions return a dictionary
 * user_update -> Function to update user in mongoDB is passed as a parameter to the Users class
+
+> ### How to run the application
+#### Use python version 3.10 up.
+
+1. git clone https://github.com/escoobi/1nfluencersmarketing
+2. pip install pandas
+3. pip install flask
+4. Enter the repository folder.
+5. run command Scripts/active
+6. run flask run
+7. access link
+8. register a user
+9. auth user
+10. enjoy!
