@@ -1,5 +1,4 @@
-> ## <center>![Tux, the Linux mascot](https://1nfluencersmarketing.com/wp-content/uploads/2020/01/1n-logo-black-uai-258x31.png)
-
+> ## <center>![Tux, the Linux mascot](https://1nfluencersmarketing.com/wp-content/uploads/2020/01/1n-logo-black-uai-258x31.png)</center>
 ### Back End Test
 ### <center>Theoretical Test</center>
 1. How does one combine two Pandas dataframes?
