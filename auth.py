@@ -67,7 +67,7 @@ def login():
             usr_dict: dict = select_user_auth(request.form["email"], request.form["password"])
             usr: Users = Users(usr_dict["email"], usr_dict["name"], usr_dict["password"])
             if usr.name is not None:
-                return render_template("ok.html", user=f"Welcome! {usr.name},", table=select_all_poke().to_html(escape=False))
+                return render_template("ok.html", user=f"Welcome! {usr.name}", table=select_all_poke().to_html(escape=False, index=False))
         except:
             return render_template("fail.html", message="Auth error!")
     return render_template('login.html')
