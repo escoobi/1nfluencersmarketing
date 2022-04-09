@@ -41,7 +41,7 @@ def pokemon():
             """
             Method construtor class poke_abilities and set dataframe with return json. (df_pandas_poke)
             """
-            df_json = df_pandas_poke(request.form['poke'])
+            df_json = df_pandas_poke(str(request.form['poke']).lower())
             json_load = json.loads(df_json)
 
             return jsonify(html="application/json",
