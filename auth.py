@@ -1,10 +1,13 @@
 import json
+
+import pandas
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from utils.users_select import select_user_auth, select_user
 from utils.users_insert import insert_user
 from utils.poke_df import df_pandas_poke
 from models.users import Users
 from utils.poke_select import select_all_poke
+
 '''
 Author = Gustavo O. Cardozo
 Email = gustavo.o.c@icloud.com
@@ -17,7 +20,6 @@ And we display a table of registered pokemon.
 When we make the query in the api, it presents the information handled with Pandas in JSON format.
 
 '''
-
 
 app = Flask(__name__)
 
@@ -60,13 +62,12 @@ def fail():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
-
     if request.method == "POST":
         try:
             usr_dict: dict = select_user_auth(request.form["email"], request.form["password"])
             usr: Users = Users(usr_dict["email"], usr_dict["name"], usr_dict["password"])
             if usr.name is not None:
-                return render_template("ok.html", user=f"Welcome! {usr.name},", tables=[select_all_poke().to_html(classes='data')], titles=select_all_poke().columns.name)
+                return render_template("ok.html", user=f"Welcome! {usr.name},", table=select_all_poke().to_html(escape=False))
         except:
             return render_template("fail.html", message="Auth error!")
     return render_template('login.html')
