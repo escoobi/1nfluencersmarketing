@@ -77,7 +77,7 @@ def login():
 def users():
     if request.method == "POST":
         insert_user(Users(request.form["email"], request.form["name"], request.form["password"]))
-        return render_template("login.html")
+        return render_template("index.html", message="Usuário cadastrado com sucesso.")
     return render_template("users.html")
 
 

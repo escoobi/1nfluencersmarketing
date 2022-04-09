@@ -10,6 +10,7 @@ Method for select pokemon in mongoDb
 2 - The second function receives or does not receive attributes, it queries all pokemon registered in mongoDB and returns a pandas.DataFrame
 """
 
+
 def select_poke(name: str) -> dict:
     try:
 
@@ -22,6 +23,7 @@ def select_poke(name: str) -> dict:
     except:
         pass
 
+
 def select_all_poke() -> pandas.DataFrame:
     try:
 
@@ -33,10 +35,7 @@ def select_all_poke() -> pandas.DataFrame:
         df["name"] = df["name"].apply(lambda x: f'<a href="{x}">{x}</a>')
         df["pic"] = df["pic"].apply(lambda x: f'<img src="{x}" alt="Pokemon" width="30" height="30">')
 
-        #for x in poke_dict:
-         #   print(x)
         return df
 
     except:
         pass
-

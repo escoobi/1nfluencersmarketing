@@ -5,16 +5,19 @@
     <title>Index</title>
 </head>
 <body>
-<h4>{{user}}</h4>
-<p>
-<form action="pokemon" method="post">
-    <label for="poke">Pokemon name:</label>
+<center>
+    <h4>{{user}}</h4>
     <p>
-        <input name="poke" autocapitalize="none" id="poke" required placeholder="pikachu" size="30">
-    <p>
-        <input type="submit" value="Find!">
-</form>
-{{table|safe}}
-<a href="javascript:history.back()">back</a>
+    <form action="pokemon" method="post">
+        <label for="poke">Pokemon name:</label>
+        <p>
+            <input name="poke" autocapitalize="none" id="poke" required placeholder="pikachu" size="30">
+        <p>
+            <input type="submit" value="Find!">
+    </form>
+
+    {{table|safe}}<p>
+    <a href="javascript:history.back()">back</a>
+</center>
 </body>
 </html>
