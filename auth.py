@@ -77,7 +77,7 @@ def login():
         try:
             return render_template("ok.html", user=f"Welcome! {poke_all(request.form['email'], request.form['password']).name}", table=select_all_poke().to_html(escape=False, index=False))
         except:
-            return render_template("login.html", message="Usuário/Password, error!")  # ajustar exibição de erros
+            return render_template("login.html", message="Usuário/Password, error!")  # Ajustado
 
     return render_template('index.html')
 
