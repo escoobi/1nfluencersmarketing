@@ -70,6 +70,9 @@ def fail():
 
 @app.route('/login', methods=['POST', 'GET'])
 def login():
+    """
+    Method poke_all return a dict all pokemon in the mongodb
+    """
     if request.method == "POST":
         try:
             return render_template("ok.html", user=f"Welcome! {poke_all(request.form['email'], request.form['password']).name}", table=select_all_poke().to_html(escape=False, index=False))
