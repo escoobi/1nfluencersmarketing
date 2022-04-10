@@ -14,7 +14,6 @@ from utils.users_select import select_user_auth
 
 from utils.poke_select import select_all_poke
 
-user_name: str
 
 '''
 Author = Gustavo O. Cardozo
@@ -28,6 +27,9 @@ And we display a table of registered pokemon.
 When we make the query in the api, it presents the information handled with Pandas in JSON format.
 
 '''
+
+user_name: str
+poke_list:  pandas.DataFrame
 
 app = Flask(__name__)
 
@@ -51,8 +53,10 @@ Method construtor class poke_abilities and set dataframe with return json. (df_p
 def pokemon():
     if request.method == "POST":
         try:
-            df_json = df_pandas_poke(str(request.form['poke']).lower())
+            df_json = df_pandas_poke(str(request.form['poke']).lower()) # Fuction return DataFrame and insert Pokemon in MongoDb
             json_load = json.loads(df_json)
+            global poke_list
+            poke_list = select_all_poke()
 
             return jsonify(html="application/json",
                            message="ok",
@@ -60,7 +64,7 @@ def pokemon():
                            status=200
                            )
         except:
-            return render_template("ok.html", user=f"Welcome! {user_name}", table=select_all_poke().to_html(escape=False, index=False), message="Pokemon not found!")
+            return render_template("ok.html", user=f"Welcome! {user_name}", table=poke_list.to_html(escape=False, index=False), message="Pokemon not found!")
 
     return render_template('poke.html')
 
@@ -79,8 +83,10 @@ def login():
         try:
             usr = select_user_auth(request.form["email"], request.form["password"])
             global user_name
+            global poke_list
             user_name = usr['name']
-            return render_template("ok.html", user=f"Welcome! {usr['name']}", table=select_all_poke().to_html(escape=False, index=False))
+            poke_list = select_all_poke()
+            return render_template("ok.html", user=f"Welcome! {usr['name']}", table=poke_list.to_html(escape=False, index=False))
         except:
             return render_template("login.html", message="Usuário/Password, error!")  # Ajustado
 
