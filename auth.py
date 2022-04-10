@@ -10,9 +10,11 @@ from utils.poke_df import df_pandas_poke
 
 from models.users import Users
 
-from utils.poke_table_all import poke_all
+from utils.users_select import select_user_auth
 
 from utils.poke_select import select_all_poke
+
+user_name: str
 
 '''
 Author = Gustavo O. Cardozo
@@ -58,7 +60,7 @@ def pokemon():
                            status=200
                            )
         except:
-            return render_template("ok.html", message="Pokemon not found!")
+            return render_template("ok.html", user=f"Welcome! {user_name}", table=select_all_poke().to_html(escape=False, index=False), message="Pokemon not found!")
 
     return render_template('poke.html')
 
@@ -75,11 +77,14 @@ def login():
     """
     if request.method == "POST":
         try:
-            return render_template("ok.html", user=f"Welcome! {poke_all(request.form['email'], request.form['password']).name}", table=select_all_poke().to_html(escape=False, index=False))
+            usr = select_user_auth(request.form["email"], request.form["password"])
+            global user_name
+            user_name = usr['name']
+            return render_template("ok.html", user=f"Welcome! {usr['name']}", table=select_all_poke().to_html(escape=False, index=False))
         except:
             return render_template("login.html", message="Usuário/Password, error!")  # Ajustado
 
-    return render_template('index.html')
+    return render_template('login.html')
 
 
 @app.route('/users', methods=['POST', 'GET'])
