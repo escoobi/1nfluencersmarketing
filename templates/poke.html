@@ -2,10 +2,22 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Alterar Pokemon</title>
 </head>
 <body>
-<h2>{{user}}</h2>
-<a href="javascript:history.back()">back</a>
+<center>
+
+    <form action="poke" method="post">
+        <label for="name">Pokemon {{pokemon}}:</label>
+        <p>
+            <img src="{{pic}}" alt='Pokemon' width='30' height='30'>
+        <p>
+            <label for="ability">Ability: {{ability}}</label>
+        <p>
+            <input type="text" name="ability" id="ability" placeholder="update ability">
+        <p>
+            <input type="submit" value="Alterar">
+    </form>
+</center>
 </body>
 </html>

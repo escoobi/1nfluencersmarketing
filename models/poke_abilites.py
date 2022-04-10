@@ -10,6 +10,7 @@ This class inherits the name and photo attributes from the master class.
 
 This class returns a dictionary
 """
+
 class PokeAbiliteis(Poke): # Extend the Poke class
     def __init__(self: object, name: str, pic: str, name_abilities: str) -> None:
         super(PokeAbiliteis, self).__init__(name, pic) # Atribution class Poke
