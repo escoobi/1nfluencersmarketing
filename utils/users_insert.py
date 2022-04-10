@@ -2,6 +2,7 @@ import pymongo
 from models.users import Users
 from utils.users_select import select_user
 import models.driver_mongodb
+from utils.users_update import update_users
 
 """
 
@@ -10,21 +11,19 @@ Perform the query before inserting
 
 """
 
-def insert_user(Users):
 
+def insert_user(Users):
     try:
         users_insert = models.driver_mongodb.Connect.db.users
 
-        users_id = users_insert.insert_one(Users.__dict__()).inserted_id
+        user = select_user(Users.email)
 
-        users_id
+        if user == None:
+            users_id = users_insert.insert_one(Users.__dict__()).inserted_id
+            users_id
+            return f"Usuário cadastrado com sucesso!"
+        else:
+            update_users(user, Users)
+            return f"Usuário alterado com sucesso!"
     except:
-        pass
-# Perform the query before inserting
-# Gustavo corrir essa logica!
-if select_user(Users.email) == None:
-    insert_user(Users)
-else:
-    print("Cadastro já realizado!")
-
-
+        return f"Error!"

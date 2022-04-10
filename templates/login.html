@@ -8,15 +8,11 @@
 <center>
     {{message}}
     <form method="post">
-        <label for="username">Email:</label>
-        <p>
-            <input name="email" id="email" required placeholder="example@example.com" size="30">
-        <p>
-            <label for="password">Password:</label>
-        <p>
-            <input type="password" name="password" id="password" required pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}">
-        <p>
-            <input type="submit" value="Log In">
+
+        {{ form.hidden_tag() }}
+        {{ form.label_email.label }} {{ form.input_email(size=40) }}<p>
+        {{ form.label_password.label }} {{ form.input_password(size=40) }}<p>
+        <input type="submit" value="Entrar">
     </form>
     <a href="javascript:history.back()">back</a>
 </center>

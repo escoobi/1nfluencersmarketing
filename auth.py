@@ -2,7 +2,7 @@ import json
 
 import pandas
 
-from flask import Flask, render_template, request, redirect, url_for, jsonify
+from flask import Flask, render_template, request, jsonify
 
 from utils.users_insert import insert_user
 
@@ -14,9 +14,15 @@ from models.poke_abilites import PokeAbiliteis
 
 from models.users import Users
 
+from forms.users_form import form_users
+from forms.login_form import form_login
+
 from utils.users_select import select_user_auth
 
 from utils.poke_select import select_all_poke, select_poke
+
+import os
+
 
 '''
 Author = Gustavo O. Cardozo
@@ -35,7 +41,9 @@ user_name: str
 poke_list: pandas.DataFrame
 poke_dict: dict
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder='templates')
+SECRET_KEY = os.urandom(32)
+app.config['SECRET_KEY'] = SECRET_KEY
 
 
 @app.route('/')
@@ -75,7 +83,7 @@ def pokemon():
                 poke_dict = select_poke(request.form['pokemon'])
 
                 return render_template("poke.html", pokemon=poke_dict["name"], pic=poke_dict["pic"],
-                                       ability= poke_dict["ability"])
+                                       ability=poke_dict["ability"])
         except:
             return render_template("ok.html", user=f"Welcome! {user_name}", table=poke_list.to_html(escape=False, index=False), message="Pokemon not found!")
 
@@ -91,7 +99,7 @@ def poke():
 
             poke_update = PokeAbiliteis(poke_dict["name"], poke_dict["pic"], poke_dict["ability"])
 
-            update_poke(poke_update) # Realiza o update no mongoDb
+            update_poke(poke_update)  # Realiza o update no mongoDb
 
             global poke_list
 
@@ -108,30 +116,32 @@ def login():
     """
     Method poke_all return a dict all pokemon in the mongodb
     """
+
+    my_form = form_login()
+
     if request.method == "POST":
         try:
-            usr = select_user_auth(request.form["email"], request.form["password"])
+            usr = select_user_auth(my_form.input_email.data, my_form.input_password.data)
             global user_name
             global poke_list
             user_name = usr['name']
             poke_list = select_all_poke()
-            return render_template("ok.html", user=f"Welcome! {user_name}", table=poke_list.to_html(escape=False, index=False))
+            return render_template("ok.html", form= my_form, user=f"Welcome! {user_name}", table=poke_list.to_html(escape=False, index=False))
         except:
-            return render_template("login.html", message="Usuário/Password, error!")  # Ajustado
+            return render_template("login.html", form= my_form, message="Usuário/Password, error!")  # Ajustado
 
-    return render_template('login.html')
+    return render_template('login.html', form= my_form)
 
 
 @app.route('/users', methods=['POST', 'GET'])
 def users():
-    if request.method == "POST":
-        if request.form["usr"] is None:
-            insert_user(Users(request.form["email"], request.form["name"], request.form["password"]))
-            return render_template("index.html", message="Usuário cadastrado com sucesso.")
-        else:
-            return render_template("users.html")
-    return render_template("users.html")
 
+    my_form = form_users()
+
+    if request.method == "POST":
+        msg = insert_user(Users(my_form.input_email.data, my_form.input_name.data, my_form.input_password.data))
+        return render_template("users.html", form=my_form, message=msg)
+    return render_template("users.html", form=my_form)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=6543)
