@@ -95,10 +95,11 @@ Perform the query before inserting
 1. git clone https://github.com/escoobi/1nfluencersmarketing
 2. pip install pandas
 3. pip install flask
-4. Enter the repository folder.
-5. run command Scripts/active
-6. run flask run
-7. access link
-8. register a user
-9. auth user
-10. enjoy!
+4. pip install -U Flask-WTF
+5. Enter the repository folder.
+6. run command Scripts/active
+7. run flask run
+8. access link
+9. register a user
+10. auth user
+11. enjoy!
