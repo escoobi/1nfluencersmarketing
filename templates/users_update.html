@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Users Updadte</title>
+</head>
+<body>
+{{message}}<p>
+<form action="users_update" method="post">
+    {{ form.hidden_tag() }}
+    {{ form.label_name.label }}{{name}}<p>
+    {{ form.label_email.label }}{{email}}<p>
+    {{ form.label_password.label }} {{ form.input_password(size=40) }}<p>
+    <button type='submit' name='usr' value='up'>Update</button>
+</form>
+<a href="/">back</a>
+</body>
+</html>

@@ -6,7 +6,7 @@
 </head>
 <body>
 <center>
-    <h4>{{user}} <form action='users' method='post'><button type='submit' name='usr' value='{{user_name}}'>editar</button></form></h4>
+    <h4>{{user}} <form action='users_update' method='post'><button type='submit' name='usr' value='{{user}}'>editar</button></form></h4>
     <p>
     <form action="pokemon" method="post">
         <label for="poke">Pokemon name:</label>
@@ -17,7 +17,7 @@
     </form>
     {{message}}<p>
     {{table|safe}}<p>
-    <a href="javascript:history.back()">Sair</a>
+    <a href="/">Sair</a>
 </center>
 </body>
 </html>

@@ -29,6 +29,7 @@ def select_user_auth(email: str, password: str) -> dict:
 
         users_select = models.driver_mongodb.Connect.db.users
 
+
         users_dict = users_select.find_one({"email": email, "password": password})
 
         return {"name": users_dict["name"], "email": users_dict["email"], "password": users_dict["password"]}
