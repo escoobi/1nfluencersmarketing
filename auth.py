@@ -73,50 +73,76 @@ Method construtor class poke_abilities and set dataframe with return json. (df_p
 def pokemon():
     if request.method == "POST":
         try:
-            if request.form['pokemon'] is None:
-                df_json = df_pandas_poke(str(request.form['poke']).lower())  # Fuction return DataFrame and insert Pokemon in MongoDb
-                json_load = json.loads(df_json)
-                global poke_list
-                poke_list = select_all_poke()
-
-                return jsonify(html="application/json",
-                               message="ok",
-                               data=json_load,
-                               status=200
-                               )
-            else:
-
+            if request.form['pokemon'] is not None:
                 global poke_dict
-
                 poke_dict = select_poke(request.form['pokemon'])
-
                 return render_template("poke.html", pokemon=poke_dict["name"], pic=poke_dict["pic"],
                                        ability=poke_dict["ability"])
+
         except:
-            return render_template("ok.html", user=user_dict["email"], table=poke_list.to_html(escape=False, index=False), message="Pokemon not found!")
+            pass
 
     return render_template('poke.html')
+
+
+"""
+Function insert a new pokemon in mongoDB
+"""
+
+
+@app.route('/poke_add', methods=['POST', 'GET'])
+def poke_add():
+    try:
+        global poke_list
+        df_json = df_pandas_poke(str(request.form['poke']).lower())  # Fuction return DataFrame and insert Pokemon in MongoDb
+        poke_list = select_all_poke()
+
+        # json_load = json.loads(df_json)
+
+        return render_template("ok.html", user=user_dict["email"], table=poke_list.to_html(escape=False, index=False), message="Pokemon cadastrado!")
+        # return jsonify(html="application/json",
+        #               message="ok",
+        #               data=json_load,
+        #               status=200
+        #               )
+    except:
+        return render_template("ok.html", user=user_dict["email"], table=poke_list.to_html(escape=False, index=False), message="Pokemon not found!")
+
+    return render_template('index.html')
+
+
+@app.route('/poke_json', methods=['POST', 'GET'])
+def poke_json():
+    try:
+        print(request.form["pokemon_add"])
+        df_json = df_pandas_poke(str(request.form['pokemon_add']).lower())  # Fuction return DataFrame and insert Pokemon in MongoDb
+        print(df_json)
+        json_load = json.loads(df_json)
+
+        return jsonify(html="application/json",
+                       message="ok",
+                       data=json_load,
+                       status=200
+                       )
+
+    except:
+        pass
+    return render_template("index.html")
 
 
 @app.route('/poke', methods=['POST', 'GET'])
 def poke():
     if request.method == "POST":
+        global poke_list
         try:
-
             poke_dict["ability"] = request.form["ability"]
-
             poke_update = PokeAbiliteis(poke_dict["name"], poke_dict["pic"], poke_dict["ability"])
-
             update_poke(poke_update)  # Realiza o update no mongoDb
-
-            global poke_list
-
             poke_list = select_all_poke()
-
             return render_template("ok.html", user=user_dict["email"], table=poke_list.to_html(escape=False, index=False), message="List Pokemon update!")
         except:
             pass
-    return render_template("poke.html")
+    return render_template("index.html")
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -167,11 +193,11 @@ def users_update():
         if request.method == "POST":
 
             if request.form["usr"] == "up":
-                usrdict: dict ={}
+                usrdict: dict = {}
                 usrdict["password"] = my_form.input_password.data
 
                 msg = update_users(usrdict,
-                                   Users(user_dict["email"],user_dict["name"], user_dict["password"]))
+                                   Users(user_dict["email"], user_dict["name"], user_dict["password"]))
                 return render_template("index.html", form=my_form, message=msg)
         return render_template("users_update.html", form=my_form, email=user_dict["email"], name=user_dict["name"], message="Alterar cadastro.")
 
