@@ -24,6 +24,6 @@ def insert_poke(Poke):
             poke_id
 
         else:
-            print("Cadastro já realizado!")
+            pass
     except:
         pass

@@ -111,19 +111,19 @@ def poke_add():
     return render_template('index.html')
 
 
-@app.route('/poke_json', methods=['POST', 'GET'])
+@app.route('/poke_json', methods=['GET'])
 def poke_json():
     try:
-        print(request.form["pokemon_add"])
-        df_json = df_pandas_poke(str(request.form['pokemon_add']).lower())  # Fuction return DataFrame and insert Pokemon in MongoDb
-        print(df_json)
-        json_load = json.loads(df_json)
+        if user_dict is not None:
+            df_json = df_pandas_poke(str(request.args['pokemon_add']).lower())  # Fuction return DataFrame and insert Pokemon in MongoDb
 
-        return jsonify(html="application/json",
-                       message="ok",
-                       data=json_load,
-                       status=200
-                       )
+            json_load = json.loads(df_json)
+
+            return jsonify(html="application/json",
+                           message="ok",
+                           data=json_load,
+                           status=200
+                           )
 
     except:
         pass
