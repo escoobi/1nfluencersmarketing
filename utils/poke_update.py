@@ -1,10 +1,10 @@
 import pymongo
-from models.poke_abilites import PokeAbiliteis
+from blueprints.pokemon.Class.poke_abilites import PokeAbiliteis
 import models.driver_mongodb
 
 """
 Method for update pokemon in mongoDb
-takes as a parameter the Poke class for update in mongoDb
+takes as a parameter the Poke models for update in mongoDb
 """
 def update_poke(Poke):
     poke_update = models.driver_mongodb.Connect.db.pokemon

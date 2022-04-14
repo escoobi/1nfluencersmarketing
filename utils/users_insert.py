@@ -5,7 +5,7 @@ import models.driver_mongodb
 
 """
 
-Function to insert user in mongoDB is passed as a parameter to the Users class
+Function to insert user in mongoDB is passed as a parameter to the Users models
 Perform the query before inserting
 
 """

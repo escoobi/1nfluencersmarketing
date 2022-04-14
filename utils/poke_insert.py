@@ -1,16 +1,11 @@
 import models.driver_mongodb
-from models.poke import Poke
-
-from models.poke_abilites import PokeAbiliteis
-
-import pymongo
 
 from utils.poke_select import select_poke
 
 """
 Method for insert pokemon in mongoDb
 
-takes as a parameter the Poke class
+takes as a parameter the Poke models
 
 perform the query to check if you already have the registration
 """

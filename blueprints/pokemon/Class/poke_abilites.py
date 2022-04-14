@@ -1,19 +1,19 @@
-from models.poke import Poke
+from blueprints.pokemon.Class.poke import Poke
 
 
 """
-Extend class Poke for PokeAbilities
+Extend models Poke for PokeAbilities
 one for many
 One Pokemon for many abilities.
 
-This class inherits the name and photo attributes from the master class.
+This models inherits the name and photo attributes from the master models.
 
-This class returns a dictionary
+This models returns a dictionary
 """
 
-class PokeAbiliteis(Poke): # Extend the Poke class
+class PokeAbiliteis(Poke): # Extend the Poke models
     def __init__(self: object, name: str, pic: str, name_abilities: str) -> None:
-        super(PokeAbiliteis, self).__init__(name, pic) # Atribution class Poke
+        super(PokeAbiliteis, self).__init__(name, pic) # Atribution models Poke
         self.__name_abilities = name_abilities
 
     @property

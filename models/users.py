@@ -1,5 +1,5 @@
 """
-User class where it receives the parameters email, name and password.
+User models where it receives the parameters email, name and password.
 The getter and setter was generated and has a dictionary return
 """
 class Users:

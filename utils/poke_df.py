@@ -4,7 +4,7 @@ import pandas
 
 from pandas.io.json import json_normalize
 
-from models.poke_abilites import PokeAbiliteis
+from blueprints.pokemon.Class.poke_abilites import PokeAbiliteis
 
 from utils.poke_insert import insert_poke
 

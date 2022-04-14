@@ -3,7 +3,7 @@ from typing import Any, Type
 """
 This receive the dataframe parameters with their respective getter and setter.
 
-This class is a master class
+This models is a master models
 """
 
 class Poke:

@@ -7,7 +7,7 @@ import models.driver_mongodb
 """
 Method for delete pokemon in mongoDb
 
-takes as a parameter the Poke class
+takes as a parameter the Poke models
 """
 def delete_poke(Poke):
 

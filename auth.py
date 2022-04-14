@@ -1,29 +1,21 @@
 import json
-
+import os
 import pandas
 
-from flask import Flask, render_template, request, jsonify
-
+from flask import Flask, render_template, request, jsonify, make_response
 from utils.users_insert import insert_user
 from utils.users_update import update_users
-
 from utils.poke_df import df_pandas_poke
-
 from utils.poke_update import update_poke
-
-from models.poke_abilites import PokeAbiliteis
-
 from models.users import Users
-
 from forms.users_form import form_users
 from forms.users_form_update import form_users_update
 from forms.login_form import form_login
-
 from utils.users_select import select_user_auth
-
 from utils.poke_select import select_all_poke, select_poke
 
-import os
+
+from blueprints.pokemon.pokemon import app_pokemon
 
 '''
 Author = Gustavo O. Cardozo
@@ -50,6 +42,7 @@ poke_list: pandas.DataFrame  # refactor, why two poke?
 poke_dict: dict
 
 app = Flask(__name__, template_folder='templates')
+app.register_blueprint(app_pokemon)
 SECRET_KEY = os.urandom(32)
 app.config['SECRET_KEY'] = SECRET_KEY
 
@@ -65,7 +58,7 @@ def ok():
 
 
 """
-Method construtor class poke_abilities and set dataframe with return json. (df_pandas_poke)
+Method construtor models poke_abilities and set dataframe with return json. (df_pandas_poke)
 """
 
 
@@ -76,8 +69,15 @@ def pokemon():
             if request.form['pokemon'] is not None:
                 global poke_dict
                 poke_dict = select_poke(request.form['pokemon'])
-                return render_template("poke.html", pokemon=poke_dict["name"], pic=poke_dict["pic"],
-                                       ability=poke_dict["ability"])
+
+                resp = make_response(render_template("poke.html", pokemon=poke_dict["name"], pic=poke_dict["pic"],
+                                       ability=poke_dict["ability"]))
+
+                resp.set_cookie("cookiePokemonDict", str(poke_dict))
+
+
+
+                return resp
 
         except:
             pass
@@ -111,38 +111,7 @@ def poke_add():
     return render_template('index.html')
 
 
-@app.route('/poke_json', methods=['GET'])
-def poke_json():
-    try:
-        if user_dict is not None:
-            df_json = df_pandas_poke(str(request.args['pokemon_add']).lower())  # Fuction return DataFrame and insert Pokemon in MongoDb
 
-            json_load = json.loads(df_json)
-
-            return jsonify(html="application/json",
-                           message="ok",
-                           data=json_load,
-                           status=200
-                           )
-
-    except:
-        pass
-    return render_template("index.html")
-
-
-@app.route('/poke', methods=['POST', 'GET'])
-def poke():
-    if request.method == "POST":
-        global poke_list
-        try:
-            poke_dict["ability"] = request.form["ability"]
-            poke_update = PokeAbiliteis(poke_dict["name"], poke_dict["pic"], poke_dict["ability"])
-            update_poke(poke_update)  # Realiza o update no mongoDb
-            poke_list = select_all_poke()
-            return render_template("ok.html", user=user_dict["email"], table=poke_list.to_html(escape=False, index=False), message="List Pokemon update!")
-        except:
-            pass
-    return render_template("index.html")
 
 
 @app.route('/login', methods=['POST', 'GET'])
@@ -165,7 +134,12 @@ def login():
             global poke_list
             poke_list = select_all_poke()
 
-            return render_template("ok.html", form=my_form, user=user_dict["email"], table=poke_list.to_html(escape=False, index=False))
+            resp = make_response(render_template("ok.html", form=my_form, user=user_dict["email"], table=poke_list.to_html(escape=False, index=False)))
+
+            resp.set_cookie('cookiePokemon', str(poke_list))
+            resp.set_cookie('cookieUsers', str(user_dict))
+
+            return resp
         except:
             return render_template("login.html", form=my_form, message="Usuário/Password, error!")  # Ajustado
 

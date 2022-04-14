@@ -4,7 +4,7 @@ import models.driver_mongodb
 
 """
 
-Function to delete user in mongoDB is passed as a parameter to the Users class
+Function to delete user in mongoDB is passed as a parameter to the Users models
 
 """
 def delete_users(Users):

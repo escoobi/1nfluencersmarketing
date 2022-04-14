@@ -7,7 +7,7 @@
 <body>
 <center>
 
-    <form action="poke" method="post">
+    <form action="/pokemon/poke" method="post">
         <label for="name">Pokemon {{pokemon}}:</label>
         <p>
             <img src="{{pic}}" alt='Pokemon' width='30' height='30'>
@@ -20,7 +20,7 @@
 
     </form>
 
-    <form action="poke_json" method="get">
+    <form action="/pokemon/poke_json" method="get">
         <button type="submit" name="pokemon_add" value="{{pokemon}}">json</button>
     </form>
 </center>
