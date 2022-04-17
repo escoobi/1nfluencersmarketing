@@ -1,5 +1,3 @@
-import pymongo
-from blueprints.pokemon.Class.poke_abilites import PokeAbiliteis
 import models.driver_mongodb
 
 """

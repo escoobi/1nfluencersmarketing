@@ -1,4 +1,4 @@
-from blueprints.pokemon.Class.poke import Poke
+from models.poke import Poke
 
 
 """

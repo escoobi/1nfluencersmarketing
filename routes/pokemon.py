@@ -1,10 +1,10 @@
 import json
 import ast
 from flask import Blueprint, request, render_template, jsonify, make_response
-from blueprints.pokemon.Class.poke_abilites import PokeAbiliteis
-from utils.poke_update import update_poke
-from utils.poke_select import select_all_poke, select_poke
-from utils.poke_df import df_pandas_poke  # Colcoar na pasta pokemon
+from models.poke_abilites import PokeAbiliteis
+from controllers.poke_update import update_poke
+from controllers.poke_select import select_all_poke, select_poke
+from controllers.poke_df import df_pandas_poke  # Colcoar na pasta pokemon
 
 app_pokemon = Blueprint("pokemon", __name__, url_prefix="/pokemon")
 
@@ -19,8 +19,8 @@ def poke():
     if request.method == "POST":
         try:
 
-            poke_dict = ast.literal_eval(request.cookies.get("cookiePokemonDict"))
-            user_dict = ast.literal_eval(request.cookies.get("cookieUsers"))
+            poke_dict = ast.literal_eval(request.cookies.get("cookiePokemonDict")) # used pck ast.literal at code for convert str to dict
+            user_dict = ast.literal_eval(request.cookies.get("cookieUsers")) # used pck ast.literal at code for convert str to dict
 
             poke_dict["ability"] = request.form["ability"]
             poke_update = PokeAbiliteis(poke_dict["name"], poke_dict["pic"], poke_dict["ability"])

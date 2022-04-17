@@ -1,21 +1,17 @@
-import json
 import os
 import pandas
 
-from flask import Flask, render_template, request, jsonify, make_response
-from utils.users_insert import insert_user
-from utils.users_update import update_users
-from utils.poke_df import df_pandas_poke
-from utils.poke_update import update_poke
+from flask import Flask, render_template, request, make_response
+from controllers.users_insert import insert_user
+from controllers.users_update import update_users
 from models.users import Users
-from forms.users_form import form_users
-from forms.users_form_update import form_users_update
-from forms.login_form import form_login
-from utils.users_select import select_user_auth
-from utils.poke_select import select_all_poke, select_poke
+from models.users_form import form_users
+from models.users_form_update import form_users_update
+from models.login_form import form_login
+from controllers.users_select import select_user_auth
+from controllers.poke_select import select_all_poke
 
-
-from blueprints.pokemon.pokemon import app_pokemon
+from routes.pokemon import app_pokemon
 
 '''
 Author = Gustavo O. Cardozo

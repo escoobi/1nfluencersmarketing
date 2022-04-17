@@ -1,6 +1,6 @@
 import models.driver_mongodb
 
-from utils.poke_select import select_poke
+from controllers.poke_select import select_poke
 
 """
 Method for insert pokemon in mongoDb

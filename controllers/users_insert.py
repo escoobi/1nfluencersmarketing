@@ -1,6 +1,4 @@
-import pymongo
-from models.users import Users
-from utils.users_select import select_user
+from controllers.users_select import select_user
 import models.driver_mongodb
 
 """
