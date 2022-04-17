@@ -31,7 +31,7 @@ def select_all_poke() -> pandas.DataFrame:
         poke_dict = poke_select.find()
 
         df = pandas.DataFrame(poke_dict, columns=["name", "pic", "ability"])
-        df["name"] = df["name"].apply(lambda x: f'<form action="pokemon" method="post">'
+        df["name"] = df["name"].apply(lambda x: f'<form action="/pokemon/pokemon" method="post">'
                                                 f'<button type="submit" name="pokemon" value="{x}">{x}</button>'
                                                 f'</form>')
         df["pic"] = df["pic"].apply(lambda x: f'<img src="{x}" alt="Pokemon" width="30" height="30">')
