@@ -51,6 +51,7 @@ It allows registering the user and changing the password.
 The user logging in has access to Pokemon research using the api (https://pokeapi.co/) we consume this api and treat the data using dataframes (Pandas) and finally registering in mongoDb with the pokemon's name, photo of the pokemon and its ability.
 And we display a table of registered pokemon.
 When we make the query in the api, it presents the information handled with Pandas in JSON format.
+>>> This project was used architecture MVC
 
 #### Class used:
    * driver_mongodb -> Contains the connection string with mongoDB.
