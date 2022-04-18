@@ -6,9 +6,9 @@
 </head>
 <body>
 <center>
-    <h4>{{user}} <form action='users_update' method='post'><button type='submit' name='usr' value='{{user}}'>editar</button></form></h4>
+    <h4>{{user}} <form action='/user/users_update' method='post'><button type='submit' name='usr' value='{{user}}'>editar</button></form></h4>
     <p>
-    <form action="poke_add" method="POST">
+    <form action="/pokemon/poke_add" method="POST">
         <label for="poke">Pokemon name:</label>
         <p>
             <input name="poke" autocapitalize="none" id="poke" required placeholder="pikachu" size="30">
